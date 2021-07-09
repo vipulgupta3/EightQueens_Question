@@ -4,14 +4,14 @@ public class GameStrategy {
 
 	private int getColumn(int cellId) {
 		// WRITE YOUR LOGIC HERE...................................		
-
-		return 0;	// just for the heck of it
+		int column=cellId%8;
+		return column;
 	}
 	
 	private int getRow(int cellId) {
 		// WRITE YOUR LOGIC HERE....................................
-		
-		return 0;	// just for the heck of it
+		int row=cellId/8;
+		return row;
 	}
 
 	public boolean isValidPosition(int cellId) {
@@ -27,9 +27,52 @@ public class GameStrategy {
 		
 		/*
 			WRITE YOUR LOGIC HERE...............................
-
-		*/
-		return isValid;
+			 * 
+			 */
+		//Check for same row
+		for(int i=0;i<8;i++)
+		{
+			if(placedQueens[row][i])
+			{
+				return isValid=false;
+			}
+		}
+		//Check for same column
+		for(int i=0;i<8;i++)
+		{
+			if(placedQueens[col][i])
+				return isValid=false;
+		}
+		
+		//Check for right lower diagonal
+		for(int i=row+1,j=col+1; i<8 && j<8;i++,j++)
+		{
+			if(placedQueens[i][j])
+				return isValid=false;
+		}
+		//Check for right upper diagonal
+		for(int i=row-1,j=col+1; i>=0 && j<8;i--,j++)
+		{
+			if(placedQueens[i][j])
+				return isValid=false;
+		}
+		//Check for left lower diagonal
+		for(int i=row+1,j=col-1; i<8 && j>=0;i++,j--)
+		{
+			if(placedQueens[i][j])
+				return isValid=false;
+		}
+		//Check for left upper diagonal
+		for(int i=row-1;j=col-1;i>=0&&j>=0;i--,j--)
+		{
+			if(placedQueens[i][j])
+				return isValid=false;
+		}
+		if(isValid)
+		{
+			placedQueens[row][col]=true;
+			numQueens++;
+		}
 	}
 }
 
